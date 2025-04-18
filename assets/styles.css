@@ -107,6 +107,8 @@ gap:1rem;
     border-radius:8px;
     cursor: pointer;
     display: block;
+    color: var(--text);
+    text-decoration: none;
 }
 
 .card h3{
