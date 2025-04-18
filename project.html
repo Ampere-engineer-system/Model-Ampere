@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projeto Arteris</title>
+  <style>
+    :root{--primary:#004aad;--secondary:#0066cc;--bg:#f4f6fa;--text:#333;--card-bg:#fff;--card-shadow:0 2px 8px rgba(0,0,0,0.1);--badge-bg:#ffc107}
+    body{display:flex;margin:0;font-family:'Segoe UI',sans-serif;color:var(--text);background:var(--bg)}
+    aside{position:fixed;top:0;left:0;width:250px;height:100vh;background:var(--primary);color:#fff;display:flex;flex-direction:column}
+    aside .logo{text-align:center;padding:1rem;font-size:1.2rem;font-weight:bold}
+    nav ul{list-style:none;padding:0;margin:0}
+    nav li{padding:1rem;cursor:pointer;transition:background .2s}
+    nav li:hover,nav li.active{background:var(--secondary)}
+    #main{margin-left:250px;flex:1;padding:1rem;overflow-y:auto;position:relative}
+    .header{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;margin-bottom:1.5rem}
+    .header h1{margin:0;font-size:1.8rem}
+    .controls{display:flex;align-items:center;gap:1rem}
+    .controls select{padding:.4rem .6rem;border:1px solid #ccc;border-radius:4px}
+    .badge{background:var(--badge-bg);padding:.4rem .8rem;border-radius:4px;font-size:.9rem;color:#000}
+    .btn-import{background:var(--secondary);border:none;color:#fff;padding:.5rem 1rem;border-radius:4px;cursor:pointer;transition:background .2s}
+    .btn-import:hover{background:var(--primary)}
+    .project-form{background:var(--card-bg);padding:1rem;box-shadow:var(--card-shadow);border-radius:8px;margin-bottom:2rem;display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+    .project-form label{display:flex;flex-direction:column;font-size:.95rem}
+    .project-form input,.project-form textarea{margin-top:.4rem;padding:.5rem;border:1px solid #ccc;border-radius:4px;font-size:.95rem}
+    .project-form textarea{grid-column:1/-1;resize:vertical}
+    .folders{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:1rem}
+    .folder-card{background:var(--card-bg);box-shadow:var(--card-shadow);padding:1rem;border-radius:8px;display:flex;align-items:start;gap:.6rem;cursor:pointer}
+    .folder-card .icon{font-size:1.4rem;margin-top:.2rem;color:var(--secondary)}
+    .folder-info h3{margin:0;font-size:1rem}
+    .folder-info small{color:#666;font-size:.8rem}
+    .back-btn{background:transparent;border:none;color:var(--primary);font-size:1rem;cursor:pointer}
+    .camera-btn{display:none;position:fixed;bottom:20px;right:20px;background:var(--secondary);border:none;color:#fff;padding:12px;border-radius:50%;font-size:24px;cursor:pointer;}
+    @media(max-width:768px){.camera-btn{display:block}}
+  </style>
+</head>
+<body>
+  <aside>
+    <div class="logo">Elétrica ERP</div>
+    <nav><ul>
+      <li>Home</li><li>Tools</li><li>Templates</li><li>Config</li>
+    </ul></nav>
+  </aside>
+  <div id="main">
+    <div id="project-view">
+      <div class="header">
+        <h1>Arteris</h1>
+        <div class="controls">
+          <select><option>Todos</option><option>Pedágio</option><option>SAU 2</option><option>SAU 4</option><option>PMRV</option></select>
+          <span class="badge">Fase: Execução</span>
+          <button class="btn-import">Importar</button>
+        </div>
+      </div>
+      <form class="project-form">
+        <label>Nome do Projeto<input type="text" value="Arteris"></label>
+        <label>Cliente<input type="text" value="Arteris S/A"></label>
+        <label>Data de Início<input type="date" value="2025-01-10"></label>
+        <label>Data de Conclusão<input type="date" value="2025-12-31"></label>
+        <label>Valor Orçado<input type="text" value="R$ 250.000,00"></label>
+        <label>Descrição<textarea rows="3">Projeto de implantação de pedágios e sistemas de acompanhamento de fluxo.</textarea></label>
+        <button type="submit">Salvar</button>
+      </form>
+      <div class="folders">
+        <div class="folder-card" data-folder="pedagio"><span class="icon">📁</span><div class="folder-info"><h3>pedágio</h3><small>05/02/2025</small></div></div>
+        <div class="folder-card" data-folder="SAU2"><span class="icon">📁</span><div class="folder-info"><h3>SAU 2</h3><small>12/03/2025</small></div></div>
+        <div class="folder-card" data-folder="SAU4"><span class="icon">📁</span><div class="folder-info"><h3>SAU 4</h3><small>20/03/2025</small></div></div>
+        <div class="folder-card" data-folder="PMRV"><span class="icon">📁</span><div class="folder-info"><h3>PMRV</h3><small>02/04/2025</small></div></div>
+      </div>
+    </div>
+    <div id="subfolder-view" style="display:none">
+      <div class="header">
+        <button class="back-btn" id="backBtn">← Voltar</button>
+        <h1 id="subfolderTitle"></h1>
+        <button class="btn-import">Importar</button>
+      </div>
+      <div class="folders" id="subfoldersList">
+        <div class="folder-card"><span class="icon">📁</span><div class="folder-info"><h3>Fachada</h3><small>01/04/2025</small></div></div>
+        <div class="folder-card"><span class="icon">📁</span><div class="folder-info"><h3>Painel 1</h3><small>03/04/2025</small></div></div>
+        <div class="folder-card"><span class="icon">📁</span><div class="folder-info"><h3>QDG SAU</h3><small>05/04/2025</small></div></div>
+        <div class="folder-card"><span class="icon">📁</span><div class="folder-info"><h3>Caixa da água</h3><small>07/04/2025</small></div></div>
+      </div>
+    </div>
+    <button class="camera-btn">📷</button>
+  </div>
+  <script>
+    const projectView=document.getElementById('project-view');
+    const subfolderView=document.getElementById('subfolder-view');
+    const subfolderTitle=document.getElementById('subfolderTitle');
+    document.querySelectorAll('#project-view .folder-card').forEach(card=>card.addEventListener('click',()=>{
+      subfolderTitle.textContent=card.querySelector('h3').textContent;
+      projectView.style.display='none';
+      subfolderView.style.display='block';
+    }));
+    document.getElementById('backBtn').addEventListener('click',()=>{
+      subfolderView.style.display='none';
+      projectView.style.display='block';
+    });
+  </script>
+</body>
+</html>

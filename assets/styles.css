@@ -1,0 +1,176 @@
+:root{
+--primary:#004aad;
+--secondary:#0066cc;
+--bg:#f4f6fa;
+--text:#333;
+--card-bg:#fff;
+--card-shadow:0 2px 8px rgba(0,0,0,0.1);
+}
+body{
+display:flex;
+margin:0;
+font-family:'Segoe UI',sans-serif;
+color:var(--text);
+background:var(--bg);
+}
+
+#main {
+
+    margin-left: 250px;
+
+    overflow-y: auto;
+
+}
+
+aside{
+width:250px;
+background:var(--primary);
+color:#fff;
+display:flex;
+flex-direction:column;
+transition:transform .3s ease;
+}
+
+aside {
+
+    position: fixed;
+
+    top: 0;
+
+    left: 0;
+
+    width: 250px;
+
+    height: 100vh;
+
+}
+
+
+aside.closed{
+transform:translateX(-100%);
+}
+aside .logo{
+text-align:center;
+padding:1rem 0;
+font-size:1.2rem;
+font-weight:bold;
+}
+nav ul{
+list-style:none;
+padding:0;
+margin:0;
+}
+nav li{
+padding:1rem;
+cursor:pointer;
+transition:background .2s;
+}
+nav li:hover,nav li.active{
+background:var(--secondary);
+}
+#main{
+flex:1;
+padding:1rem;
+overflow-y:auto;
+}
+.header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:1rem;
+}
+.toggle-btn{
+background:var(--primary);
+border:none;
+color:#fff;
+padding:.5rem;
+cursor:pointer;
+border-radius:4px;
+}
+.section{
+margin-bottom:2rem;
+}
+.section h2{
+font-size:1.5rem;
+margin-bottom:1rem;
+}
+.projects{
+display:grid;
+grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
+gap:1rem;
+}
+
+.card{
+    background:var(--card-bg);
+    box-shadow:var(--card-shadow);
+    padding:1rem;
+    border-radius:8px;
+    cursor: pointer;
+    display: block;
+}
+
+.card h3{
+margin:0 0 .5rem;
+}
+.card p{
+margin:0 0 .5rem;
+font-size:.9rem;
+}
+.card .meta{
+font-size:.8rem;
+color:#666;
+}
+.list{
+list-style:none;
+padding:0;
+margin:0;
+}
+.list li{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:.5rem 0;
+border-bottom:1px solid #ddd;
+}
+.list a{
+text-decoration:none;
+color:var(--text);
+flex:1;
+}
+.templates-header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:1rem;
+}
+.settings{
+display:grid;
+grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+gap:1rem;
+}
+.setting{
+background:var(--card-bg);
+box-shadow:var(--card-shadow);
+padding:1rem;
+border-radius:8px;
+}
+.setting label{
+display:flex;
+align-items:center;
+font-size:.95rem;
+}
+.setting input{
+margin-right:.5rem;
+}
+button{
+background:var(--secondary);
+border:none;
+color:#fff;
+padding:.4rem .8rem;
+cursor:pointer;
+border-radius:4px;
+transition:background .2s;
+}
+button:hover{
+background:var(--primary);
+}
